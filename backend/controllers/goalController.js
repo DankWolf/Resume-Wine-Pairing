@@ -1,39 +1,80 @@
-//@desc   Get goals
+//@desc   Get wine
 //@route  GET /api/goals
 //@access Private
 
-const getGoals = (req, res) => {
-    return res.status(200).json({message: 'Get goals'})
+const Goal = require('../models/goalModel')
+
+const getWine = async (req, res, next) => {
+    console.log('getGoals is running');
+    Goal.Wine.find()
+      .then(wine => {
+        
+    //     return next();
+    //   })
+    //   .catch(err => {
+    //     return next(err);
+    //   });
+
+    return res.status(200).json(wine)}
+    )
+      .catch(err => {
+        return next(err);
+      })
 }
 
-//@desc   set goal
+//@desc   set wine
 //@route  Post /api/goals
 //@access Private
 
-const setGoal = (req, res) => {
-    console.log(req.body);
-    return res.status(200).json({message: 'Set goal'})
+const setWine = (req, res, next) => {
+    console.log('setWine is running');
+    Goal.Wine.create({
+        flavor: req.body.flavor,
+        text: req.body.text
+    })
+      .then(wine => {
+    return res.status(200).json(wine)}
+    )
+      .catch(err => {
+        return next(err);
+      })
+
 }
 
-//@desc   Update goal
+//@desc   Update wine
 //@route  PUT /api/goals/:id
 //@access Private
 
-const updateGoal = (req, res) => {
-    return res.status(200).json({message: `Update goal ${req.params.id}` })
+const updateWine = (req, res) => {
+    //req.body vs req.params - through web submission
+    console.log('updateWine is running')
+    Goal.Wine.findOneAndUpdate(req.body.flavor, {text: req.body.text}, {upsert: true, new: true})
+        .then(wine => {
+            return res.status(200).json(wine)
+        })
+        .catch(err => {
+            return next(err);
+        })
 }
 
 //@desc   Delete goals
 //@route  DELETE /api/goals/:id
 //@access Private
 
-const deleteGoal = (req, res) => {
-    return res.status(200).json({message: `Delete goal ${req.params.id}` })
+const deleteWine = (req, res) => {
+    console.log('deletWine is running')
+    Goal.Wine.findOneAndDelete(req.body.flavor)
+        .then(wine => {
+            return res.status(200).json({message: `Deleted ${wine}` })
+        })
+        .catch(err => {
+            return next(err);
+        })
 }
 
 module.exports = {
-    getGoals,
-    setGoal,
-    updateGoal,
-    deleteGoal,
+    getWine,
+    setWine,
+    updateWine,
+    deleteWine,
 }
