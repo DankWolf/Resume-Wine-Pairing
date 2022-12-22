@@ -2,7 +2,7 @@ import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import './App.css'
 
-// const FETCH_URL = '/api/wine';
+const FETCH_URL = 'http://localhost:8080/api/wine';
 
 function App() {
   const [flavorInput, setFlavorInput] = useState("");
@@ -10,16 +10,18 @@ function App() {
   
 
 function onSubmit(event) {
+    event.preventDefault();
     console.log("submitting")
-    fetch('/api/wine', {
-    method: "GET",
-    header: {"Content-Type": "application/json"},
-    body: JSON.stringify({flavor: flavorInput}),
-  })
-  .then(result => {
+    fetch(`${FETCH_URL}/${flavorInput}`)
+    .then(res => res.json())
+    .then(result => {
+      console.log('result: ', result)
     setResult(result);
     setFlavorInput("");
   })
+    .catch(err => {
+      console.log(err);
+    })
 
 }
 
@@ -43,8 +45,9 @@ function onSubmit(event) {
       </section>
 
       <section>
-      {/* <form onSubmit={onSubmit}> */}
+      <form onSubmit={onSubmit}>
         <input
+        className='inputBox'
         type="text"
         name="wine"
         placeholder='Enter protein or dominant flavor'
@@ -52,7 +55,7 @@ function onSubmit(event) {
         onChange={(e) => setFlavorInput(e.target.value)} 
         />
         <input type="submit" value="Pair wines" />
-      {/* </form> */}
+      </form>
       <div className="resultBox">{result}</div>
       </section>
 

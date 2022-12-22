@@ -3,11 +3,12 @@ const router = express.Router()
 const { getWine, setWine, updateWine, deleteWine } = require('../controllers/wineController')
 
 
-router.get('/', getWine, (req, res) => {
+router.get('/:flavor', getWine, (req, res) => {
+    console.log("res.locals", res.locals.pairing);
     res.status(200).json(res.locals.pairing)
 });
 
-router.post('/', setWine, (req, res) => {
+router.post('/:flavor', setWine, (req, res) => {
     res.status(200).json(wine)
 });
 

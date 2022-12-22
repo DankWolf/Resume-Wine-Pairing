@@ -4,20 +4,15 @@
 
 const Goal = require('../models/goalModel')
 
-const getWine = async (req, res, next) => {
-    console.log('getWine is running');
-    const search = req.body;
-    Goal.Wine.find(search)
+const getWine = (req, res, next) => {
+    const search = req.params;
+    console.log("search", search);
+    Goal.Wine.findOne(search)
       .then(wine => {
         res.locals.pairing = wine.text
-    //     return next();
-    //   })
-    //   .catch(err => {
-    //     return next(err);
-    //   });
         console.log("???", wine)
-    return res.status(200).json(res.locals.pairing)}
-    )
+    return next()
+      })
       .catch(err => {
         return next(err);
       })
