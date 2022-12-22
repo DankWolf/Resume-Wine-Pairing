@@ -4,7 +4,7 @@ const { getWine, setWine, updateWine, deleteWine } = require('../controllers/win
 
 
 router.get('/', getWine, (req, res) => {
-    res.status(200).json(wine)
+    res.status(200).json(res.locals.pairing)
 });
 
 router.post('/', setWine, (req, res) => {
