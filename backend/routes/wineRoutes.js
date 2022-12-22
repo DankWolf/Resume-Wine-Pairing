@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router()
-const { getWine, setWine, updateWine, deleteWine } = require('../controllers/goalController')
+const { getWine, setWine, updateWine, deleteWine } = require('../controllers/wineController')
 
 
 router.get('/', getWine, (req, res) => {
@@ -11,12 +11,12 @@ router.post('/', setWine, (req, res) => {
     res.status(200).json(wine)
 });
 
-router.put('/:id', updateWine, (req, res) => {
+router.put('/update', updateWine, (req, res) => {
     res.status(200).json(wine)
 });
 
 
-router.delete('/:id', deleteWine, (req, res) => {
+router.delete('/delete', deleteWine, (req, res) => {
     res.status(200).json({message: `Deleted ${wine}` })
 });
 

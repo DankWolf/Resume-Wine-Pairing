@@ -5,7 +5,7 @@
 const Goal = require('../models/goalModel')
 
 const getWine = async (req, res, next) => {
-    console.log('getGoals is running');
+    console.log('getWine is running');
     Goal.Wine.find()
       .then(wine => {
         
@@ -50,7 +50,7 @@ const updateWine = (req, res) => {
     console.log('updateWine is running')
     Goal.Wine.findOneAndUpdate(req.body.flavor, {text: req.body.text}, {upsert: true, new: true})
         .then(wine => {
-            return res.status(200).json(wine)
+            return res.status(200).json(wine);
         })
         .catch(err => {
             return next(err);
