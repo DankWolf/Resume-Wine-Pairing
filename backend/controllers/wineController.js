@@ -6,11 +6,9 @@ const Goal = require('../models/goalModel')
 
 const getWine = (req, res, next) => {
     const search = req.params;
-    console.log("search", search);
     Goal.Wine.findOne(search)
       .then(wine => {
         res.locals.pairing = wine.text
-        console.log("???", wine)
     return next()
       })
       .catch(err => {

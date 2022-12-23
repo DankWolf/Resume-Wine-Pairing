@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import './App.css'
+import { SocialIcon } from 'react-social-icons';
 
 const FETCH_URL = 'http://localhost:8080/api/wine';
 
@@ -34,7 +35,9 @@ function onSubmit(event) {
         <h1>CHRISTOPHER TENORIO</h1>
         <h3>Software Engineer & Lover of Wine</h3>
         <p>Enthusiastic and motivated self-learner</p>
-        <div> PUT ALL YOUR LINKS HERE</div>
+        <div id='social'>
+          <SocialIcon id= "linked" url= "https://www.linkedin.com/in/christopher-tenorio/"/> <SocialIcon url= "https://github.com/DankWolf"/> <SocialIcon url="https://twitter.com/ChrisATenorio" /><SocialIcon url="https://www.youtube.com/watch?v=dQw4w9WgXcQ" />
+        </div>
        </section>
 
       <section>
